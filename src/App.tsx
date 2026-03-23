@@ -42,8 +42,6 @@ const App = () => (
         <AppContent />
       </TooltipProvider>
     </QueryClientProvider>
-    <Analytics />
-    <SpeedInsights />
   </>
 );
 

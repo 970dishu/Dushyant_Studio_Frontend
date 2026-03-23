@@ -10,7 +10,7 @@ const videoProjects = [
     client: "Solana x Across",
     subtitle: "Solana Bridge",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/solana.mp4",
+    videoUrl: "/videos/solana2.mp4",
     thumbnailTime: 0.1
   },
   {

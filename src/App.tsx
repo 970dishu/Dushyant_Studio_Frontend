@@ -8,8 +8,6 @@ import ProjectDetail from "./pages/ProjectDetail";
 import MyStory from "./pages/MyStory";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 const queryClient = new QueryClient();

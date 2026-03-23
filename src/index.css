@@ -52,7 +52,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     overflow-x: hidden;
   }
 
@@ -63,21 +63,6 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
-  }
-
-  /* Custom cursor for pointer devices (desktops) only */
-  @media (pointer: fine) {
-    * {
-      cursor: none !important;
-    }
-
-    a, button, [role="button"], input, textarea, select {
-      cursor: none !important;
-    }
-
-    body {
-      cursor: none !important;
-    }
   }
 }
 

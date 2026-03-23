@@ -1,5 +1,3 @@
-import filmEditingThumbnail from "/assets/film-editing-thumbnail.jpg";
-
 export interface Project {
   id: string;
   slug: string;
@@ -17,7 +15,6 @@ export interface Project {
   problem: string;
   solution: string;
   challenges: string[];
-  results: string[];
   tools: string[];
   gallery?: string[];
 }
@@ -45,12 +42,6 @@ export const projects: Project[] = [
       "Creating templates that could be easily adapted for various platforms",
       "Balancing creative expression with brand guidelines"
     ],
-    results: [
-      "40% increase in social media engagement",
-      "Brand recognition improved by 25%",
-      "Reduced content production time by 50%",
-      "Successfully launched across 5 platforms"
-    ],
     tools: ["After Effects", "Premiere Pro", "Illustrator"],
     gallery: [
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&h=800&fit=crop",
@@ -66,7 +57,7 @@ export const projects: Project[] = [
     client: "Independent Filmmaker",
     year: "2024",
     role: "Lead Film Editor",
-    image: filmEditingThumbnail,
+    image: "/assets/agyaat-khat.jpg?w=800&h=600&fit=crop",
     // TODO: Add your video file to public/videos/ folder and update the path
     heroVideo: "/videos/agyaat-aadarsh-film-editing.mp4",
     isVideo: true,
@@ -78,12 +69,6 @@ export const projects: Project[] = [
       "Balancing multiple narrative threads",
       "Working with varying footage quality from different sources",
       "Meeting tight festival submission deadlines"
-    ],
-    results: [
-      "Selected for 3 international film festivals",
-      "Audience award at premiere screening",
-      "Distribution deal secured",
-      "Critical acclaim from industry reviewers"
     ],
     tools: ["Premiere Pro", "DaVinci Resolve", "Audition", "Frame.io"],
     gallery: [
@@ -100,7 +85,7 @@ export const projects: Project[] = [
     client: "Tech Startup",
     year: "2024",
     role: "Creative Director",
-    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop",
+    image: "/assets/vfx-ai.jpg?w=800&h=600&fit=crop",
     // TODO: Add your video file to public/videos/ folder and update the path
     heroVideo: "/videos/vfx-ai-creative-direction.mp4",
     isVideo: true,
@@ -112,12 +97,6 @@ export const projects: Project[] = [
       "Creating a system flexible enough for future growth",
       "Training team members on new brand guidelines",
       "Balancing innovation with market expectations"
-    ],
-    results: [
-      "Unified brand presence across 12 platforms",
-      "60% faster content production",
-      "Brand recall increased by 45%",
-      "Team efficiency improved by 35%"
     ],
     tools: ["Figma", "After Effects", "Notion", "Slack"],
     gallery: [
@@ -134,7 +113,7 @@ export const projects: Project[] = [
     client: "Advertising Agency",
     year: "2024",
     role: "Lead Storywriter",
-    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=600&fit=crop",
+    image: "/assets/devlearn.jpg?w=800&h=600&fit=crop",
     // TODO: Add your video file to public/videos/ folder and update the path
     heroVideo: "/videos/devlearn-storywriting.mp4",
     isVideo: true,
@@ -146,12 +125,6 @@ export const projects: Project[] = [
       "Adapting narratives for different cultural contexts",
       "Balancing emotional impact with brand messaging",
       "Working within strict time constraints per spot"
-    ],
-    results: [
-      "Campaign reached 50M+ viewers",
-      "85% positive sentiment score",
-      "Brand perception shifted by 30%",
-      "Award-winning campaign recognition"
     ],
     tools: ["Final Draft", "Notion", "Miro", "Premiere Pro"],
     gallery: [

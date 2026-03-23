@@ -7,37 +7,46 @@ import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import MyStory from "./pages/MyStory";
 import NotFound from "./pages/NotFound";
-import GlobalCursor from "./components/GlobalCursor";
 import ScrollToTop from "./components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 const queryClient = new QueryClient();
 
+const AppContent = () => {
+  useSmoothScroll();
+
+  return (
+    <div className="min-h-screen bg-background relative">
+      {/* Grain texture overlay */}
+      <div className="grain-overlay" aria-hidden="true" />
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/my-story" element={<MyStory />} />
+          <Route path="/project/:slug" element={<ProjectDetail />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
 const App = () => (
-  <><QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <div className="min-h-screen bg-background cursor-none relative">
-        {/* Grain texture overlay */}
-        <div className="grain-overlay" aria-hidden="true" />
-        <GlobalCursor />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/my-story" element={<MyStory />} />
-            <Route path="/project/:slug" element={<ProjectDetail />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </TooltipProvider>
-  </QueryClientProvider>
-  <Analytics />
-  <SpeedInsights /></>
+  <>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <AppContent />
+      </TooltipProvider>
+    </QueryClientProvider>
+    <Analytics />
+    <SpeedInsights />
+  </>
 );
 
 export default App;

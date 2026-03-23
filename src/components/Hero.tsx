@@ -7,8 +7,8 @@ import { Maximize2, X, Volume2, VolumeX } from "lucide-react";
 const videoProjects = [
     {
     id: 1,
-    client: "SOLANA",
-    subtitle: "SHOT ON IPHONE",
+    client: "Solana x Across",
+    subtitle: "Solana Bridge",
     // TODO: Add your video file to public/videos/ folder and update the path
     videoUrl: "/videos/solana.mp4",
     thumbnailTime: 0.1

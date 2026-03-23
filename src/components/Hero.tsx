@@ -5,8 +5,16 @@ import MorphingText from "./MorphingText";
 import { Maximize2, X, Volume2, VolumeX } from "lucide-react";
 
 const videoProjects = [
-  {
+    {
     id: 1,
+    client: "SOLANA",
+    subtitle: "SHOT ON IPHONE",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/solana.mp4",
+    thumbnailTime: 0.1
+  },
+  {
+    id: 2,
     client: "RUN",
     subtitle: "SHOT ON IPHONE",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -14,7 +22,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 2,
+    id: 3,
     client: "Across Web3",
     subtitle: "DeFi Night",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -22,7 +30,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 3,
+    id: 4,
     client: "Finance",
     subtitle: "Documentry",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -30,7 +38,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 4,
+    id: 5,
     client: "Reliq",
     subtitle: "Launch Campaign",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -38,7 +46,7 @@ const videoProjects = [
     thumbnailTime: 7.0
   },
   {
-    id: 5,
+    id: 6,
     client: "Devlearn",
     subtitle: "Community Pitch",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -46,7 +54,7 @@ const videoProjects = [
     thumbnailTime: 1.1
   },
   {
-    id: 6,
+    id: 7,
     client: "Rangrezz-Alfaaz",
     subtitle: "Promotional Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -54,7 +62,7 @@ const videoProjects = [
     thumbnailTime: 1.1
   },
   {
-    id: 7,
+    id: 8,
     client: "Across Web3",
     subtitle: "Infotainment",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -62,7 +70,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 8,
+    id: 9,
     client: "Agyaat Khat Intro",
     subtitle: "Animated Intro",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -70,7 +78,7 @@ const videoProjects = [
     thumbnailTime: 3.1
   },
   {
-    id: 9,
+    id: 10,
     client: "SaaS VFX AI",
     subtitle: "Intro Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -78,7 +86,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 10,
+    id: 11,
     client: "SaaS VFX AI",
     subtitle: "Explainer Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -86,7 +94,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 11,
+    id: 12,
     client: "Thanks Giving",
     subtitle: "Welcoming Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -94,7 +102,7 @@ const videoProjects = [
     thumbnailTime: 3.1
   },
   {
-    id: 12,
+    id: 13,
     client: "Agyaat Khat",
     subtitle: "Short Series",
     // TODO: Add your video file to public/videos/ folder and update the path

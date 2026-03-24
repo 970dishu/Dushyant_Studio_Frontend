@@ -145,7 +145,7 @@ const Hero = () => {
         }
       }
     });
-  }, [activeId]);
+  }, [activeId, isMobile]);
 
   // Lock body scroll during fullscreen
   useEffect(() => {
@@ -191,7 +191,7 @@ const Hero = () => {
     if (updateActive && closestId !== null && closestId !== activeId) {
       setActiveId(closestId);
     }
-  }, [activeId]);
+  }, [activeId, isMobile]);
 
   // Listen for scroll events to detect center card
   useEffect(() => {

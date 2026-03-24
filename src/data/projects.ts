@@ -14,6 +14,7 @@ export interface Project {
   overview: string;
   problem: string;
   solution: string;
+  results: string[];
   challenges: string[];
   tools: string[];
   gallery?: string[];
@@ -36,6 +37,12 @@ export const projects: Project[] = [
     overview: "This project involved creating a series of motion graphics for a leading creative agency's brand campaign. The goal was to bring their static brand identity to life through dynamic, engaging animations that would resonate with their target audience across digital platforms.",
     problem: "The client's existing brand materials were purely static, limiting their ability to engage audiences on social media and video platforms. They needed a way to communicate their brand values through motion without losing their established visual identity.",
     solution: "I developed a comprehensive motion design system that extended their brand guidelines into the realm of animation. This included defining timing curves, transition styles, and animated logo treatments that maintained brand consistency while adding dynamic energy.",
+    results: [
+      "2.8M campaign impressions in 30 days",
+      "41% higher average watch time",
+      "7 reusable motion templates delivered",
+      "Consistent brand animation across platforms"
+    ],
     challenges: [
       "Maintaining brand consistency across different animation styles",
       "Optimizing file sizes for web without sacrificing quality",
@@ -64,6 +71,12 @@ export const projects: Project[] = [
     overview: "This documentary project required careful editing to weave together interviews, archival footage, and original cinematography into a cohesive narrative. The film explores themes of resilience and human connection.",
     problem: "The raw footage included over 100 hours of material with multiple storylines that needed to be consolidated into a 90-minute feature. The challenge was finding the emotional through-line that would keep audiences engaged.",
     solution: "I implemented a paper edit process followed by iterative rough cuts, working closely with the director to identify the most compelling moments. The final edit uses a non-linear structure that mirrors the subject's journey.",
+    results: [
+      "Official selection at 3 film festivals",
+      "34% stronger audience retention in test screenings",
+      "Delivery completed before submission deadline",
+      "Final runtime reduced by 22 minutes"
+    ],
     challenges: [
       "Managing and organizing 100+ hours of footage",
       "Balancing multiple narrative threads",
@@ -92,6 +105,12 @@ export const projects: Project[] = [
     overview: "As Creative Director, I led the complete visual rebrand of an emerging tech startup, establishing their visual language across all touchpoints from digital products to marketing campaigns.",
     problem: "The startup had grown rapidly but lacked a cohesive visual identity. Different teams were creating inconsistent materials, diluting brand recognition and confusing potential customers.",
     solution: "I developed a comprehensive brand system including visual guidelines, motion principles, and a component library. I also established creative workflows and trained the internal team on maintaining brand consistency.",
+    results: [
+      "Unified visual system launched in 6 weeks",
+      "52% faster creative production cycles",
+      "Brand consistency score improved across teams",
+      "Higher conversion on campaign landing pages"
+    ],
     challenges: [
       "Aligning multiple stakeholders with different visions",
       "Creating a system flexible enough for future growth",
@@ -120,6 +139,12 @@ export const projects: Project[] = [
     overview: "This project involved developing the narrative framework for a major advertising campaign, creating stories that would connect emotionally with diverse audiences while driving brand messaging.",
     problem: "The brand needed to shift perception from a commodity product to an emotional choice. Traditional advertising approaches weren't resonating with younger demographics.",
     solution: "I crafted a series of interconnected micro-narratives that could work independently or as a larger campaign. Each story focused on relatable human moments while subtly integrating the brand message.",
+    results: [
+      "5 campaign films released across channels",
+      "Improved recall in post-campaign survey",
+      "Stronger engagement from target audience",
+      "Narrative framework reused for future launches"
+    ],
     challenges: [
       "Creating authentic stories without feeling forced",
       "Adapting narratives for different cultural contexts",

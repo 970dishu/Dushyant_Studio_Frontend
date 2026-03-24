@@ -7,14 +7,27 @@ import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import MyStory from "./pages/MyStory";
 import NotFound from "./pages/NotFound";
-import ScrollToTop from "./components/ScrollToTop";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 const queryClient = new QueryClient();
 
-const AppContent = () => {
+const AppRoutes = () => {
   useSmoothScroll();
 
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/my-story" element={<MyStory />} />
+        <Route path="/project/:slug" element={<ProjectDetail />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
+
+const AppContent = () => {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Grain texture overlay */}
@@ -22,14 +35,7 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/my-story" element={<MyStory />} />
-          <Route path="/project/:slug" element={<ProjectDetail />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
     </div>
   );

@@ -36,24 +36,40 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.service) {
+      toast({
+        title: "Service required",
+        description: "Please select the service you need.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Update this URL to your Azure VM server URL when deployed
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      
-      const response = await fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
+      const apiBase = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "";
+      const endpoint = apiBase ? `${apiBase}/api/contact` : "/api/contact";
+
+      const response = await fetch(endpoint, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const isJson = response.headers.get("content-type")?.includes("application/json");
+      const data = isJson ? await response.json() : null;
 
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || 'Failed to send message');
+      if (!response.ok || !data?.success) {
+        const message =
+          data?.error ||
+          (response.status >= 500
+            ? "Server error. Please try again in a minute."
+            : "Failed to send message");
+        throw new Error(message);
       }
 
       // Show success animation
@@ -78,7 +94,7 @@ const ContactSection = () => {
       console.error("Error sending message:", error);
       toast({
         title: "Failed to send message",
-        description: "Please try again or email me directly.",
+        description: error instanceof Error ? error.message : "Please try again or email me directly.",
         variant: "destructive",
       });
     } finally {
@@ -238,6 +254,8 @@ const ContactSection = () => {
                     type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-secondary border-0 rounded-full text-left text-sm sm:text-base flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    aria-expanded={isDropdownOpen}
+                    aria-controls="service-options"
                   >
                     <span className={formData.service ? "text-foreground" : "text-muted-foreground"}>
                       {formData.service || "Select..."}
@@ -246,7 +264,7 @@ const ContactSection = () => {
                   </button>
 
                   {isDropdownOpen && (
-                    <div className="absolute z-10 w-full mt-2 bg-secondary border border-border rounded-2xl shadow-lg overflow-hidden">
+                    <div id="service-options" className="absolute z-10 w-full mt-2 bg-secondary border border-border rounded-2xl shadow-lg overflow-hidden">
                       {serviceOptions.map((option) => (
                         <button
                           key={option}

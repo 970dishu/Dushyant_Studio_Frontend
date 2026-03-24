@@ -1,5 +1,4 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Play } from "lucide-react";
 import { getProjectBySlug, getOtherProjects } from "@/data/projects";
@@ -11,10 +10,6 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const project = getProjectBySlug(slug || "");
   const otherProjects = getOtherProjects(slug || "");
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
 
   if (!project) {
     return (

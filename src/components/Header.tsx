@@ -71,19 +71,35 @@ const Header = () => {
           </div>
 
           {/* "Available for work" text - Shown when scrolled */}
-          <a href={isHomePage ? "#contact" : "/#contact"} className={`flex items-center gap-2 transition-all duration-500 overflow-hidden cursor-pointer hover:text-primary ${isScrolled ? 'max-w-[200px] opacity-100 pr-2' : 'max-w-0 opacity-0'}`}>
-            <span className="text-sm font-medium text-foreground whitespace-nowrap">Available for work</span>
-            <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 animate-pulse"></span>
-          </a>
+          {isHomePage ? (
+            <a href="#contact" className={`flex items-center gap-2 transition-all duration-500 overflow-hidden cursor-pointer hover:text-primary ${isScrolled ? 'max-w-[200px] opacity-100 pr-2' : 'max-w-0 opacity-0'}`}>
+              <span className="text-sm font-medium text-foreground whitespace-nowrap">Available for work</span>
+              <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 animate-pulse"></span>
+            </a>
+          ) : (
+            <Link to="/#contact" className={`flex items-center gap-2 transition-all duration-500 overflow-hidden cursor-pointer hover:text-primary ${isScrolled ? 'max-w-[200px] opacity-100 pr-2' : 'max-w-0 opacity-0'}`}>
+              <span className="text-sm font-medium text-foreground whitespace-nowrap">Available for work</span>
+              <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 animate-pulse"></span>
+            </Link>
+          )}
 
           {/* Contact Button / Hamburger Menu - Smooth transition */}
           <div className="relative flex items-center justify-center" style={{ width: isScrolled ? '40px' : '100px', transition: 'width 0.4s cubic-bezier(0.25, 1, 0.5, 1)' }}>
-            <a
-              href={isHomePage ? "#contact" : "/#contact"}
-              className={`inline-flex items-center justify-center px-6 py-2 text-sm font-medium bg-white text-background rounded-full hover:bg-primary hover:text-primary-foreground whitespace-nowrap transition-all duration-400 ${isScrolled ? 'opacity-0 pointer-events-none absolute scale-75' : 'opacity-100 relative scale-100'}`}
-            >
-              Contact
-            </a>
+            {isHomePage ? (
+              <a
+                href="#contact"
+                className={`inline-flex items-center justify-center px-6 py-2 text-sm font-medium bg-white text-background rounded-full hover:bg-primary hover:text-primary-foreground whitespace-nowrap transition-all duration-400 ${isScrolled ? 'opacity-0 pointer-events-none absolute scale-75' : 'opacity-100 relative scale-100'}`}
+              >
+                Contact
+              </a>
+            ) : (
+              <Link
+                to="/#contact"
+                className={`inline-flex items-center justify-center px-6 py-2 text-sm font-medium bg-white text-background rounded-full hover:bg-primary hover:text-primary-foreground whitespace-nowrap transition-all duration-400 ${isScrolled ? 'opacity-0 pointer-events-none absolute scale-75' : 'opacity-100 relative scale-100'}`}
+              >
+                Contact
+              </Link>
+            )}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`w-10 h-10 flex items-center justify-center bg-primary text-primary-foreground rounded-full transition-all duration-400 ${isScrolled ? 'opacity-100 scale-100 relative' : 'opacity-0 pointer-events-none absolute scale-75'}`}
@@ -116,10 +132,17 @@ const Header = () => {
           </div>
 
             {/* Available for work text with green dot */}
-            <a href={isHomePage ? "#contact" : "/#contact"} className="flex items-center gap-2 pr-2 cursor-pointer hover:text-primary transition-colors min-w-0">
-              <span className="text-xs sm:text-sm font-medium text-foreground truncate max-w-[120px] sm:max-w-none">Available for work</span>
-              <span className="w-2 h-2 bg-primary rounded-full animate-pulse flex-shrink-0"></span>
-            </a>
+            {isHomePage ? (
+              <a href="#contact" className="flex items-center gap-2 pr-2 cursor-pointer hover:text-primary transition-colors min-w-0">
+                <span className="text-xs sm:text-sm font-medium text-foreground truncate max-w-[120px] sm:max-w-none">Available for work</span>
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse flex-shrink-0"></span>
+              </a>
+            ) : (
+              <Link to="/#contact" className="flex items-center gap-2 pr-2 cursor-pointer hover:text-primary transition-colors min-w-0">
+                <span className="text-xs sm:text-sm font-medium text-foreground truncate max-w-[120px] sm:max-w-none">Available for work</span>
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse flex-shrink-0"></span>
+              </Link>
+            )}
 
             {/* Hamburger Menu Button */}
             <button
@@ -158,13 +181,23 @@ const Header = () => {
                 </Link>
               )
             ))}
-            <a
-              href={isHomePage ? "#contact" : "/#contact"}
-              onClick={() => setIsMenuOpen(false)}
-              className="inline-flex items-center justify-center px-6 py-3 mt-4 text-sm font-medium bg-white text-background rounded-full"
-            >
-              Contact
-            </a>
+            {isHomePage ? (
+              <a
+                href="#contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="inline-flex items-center justify-center px-6 py-3 mt-4 text-sm font-medium bg-white text-background rounded-full"
+              >
+                Contact
+              </a>
+            ) : (
+              <Link
+                to="/#contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="inline-flex items-center justify-center px-6 py-3 mt-4 text-sm font-medium bg-white text-background rounded-full"
+              >
+                Contact
+              </Link>
+            )}
           </nav>
         </div>
       )}

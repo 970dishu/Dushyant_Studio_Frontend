@@ -177,70 +177,74 @@ const ProjectDetail = () => {
       </section>
 
       {/* Challenges Section */}
-      <section className="py-20 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground mb-8">
-              Challenges Faced
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {project.challenges.map((challenge, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-start gap-4 p-6 bg-secondary rounded-xl"
-                >
-                  <span className="text-primary font-heading text-2xl font-bold">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <p className="text-foreground">{challenge}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {project.challenges.length > 0 && (
+        <section className="py-20 px-6 md:px-12 lg:px-20">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground mb-8">
+                Challenges Faced
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {project.challenges.map((challenge, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-start gap-4 p-6 bg-secondary rounded-xl"
+                  >
+                    <span className="text-primary font-heading text-2xl font-bold">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-foreground">{challenge}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Results Section */}
-      <section className="py-20 px-6 md:px-12 lg:px-20 bg-secondary">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground mb-8">
-              Results & Impact
-            </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {project.results.map((result, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="p-6 bg-background rounded-xl border border-border text-center"
-                >
-                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <ArrowUpRight className="w-5 h-5 text-primary" />
-                  </div>
-                  <p className="text-foreground font-medium">{result}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {project.results.length > 0 && (
+        <section className="py-20 px-6 md:px-12 lg:px-20 bg-secondary">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground mb-8">
+                Results & Impact
+              </h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {project.results.map((result, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="p-6 bg-background rounded-xl border border-border text-center"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                      <ArrowUpRight className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-foreground font-medium">{result}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Gallery Section */}
       {project.gallery && project.gallery.length > 0 && (

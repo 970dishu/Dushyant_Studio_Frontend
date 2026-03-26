@@ -116,6 +116,7 @@ const Hero = () => {
   const [fullscreenVideoId, setFullscreenVideoId] = useState<number | null>(null);
   const [isMuted, setIsMuted] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const fullscreenVideoRef = useRef<HTMLVideoElement | null>(null);
   const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
   const cardRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
   const [cardTransforms, setCardTransforms] = useState<{ [key: number]: { rotateY: number; translateZ: number; opacity: number } }>({});
@@ -133,7 +134,7 @@ const Hero = () => {
     Object.entries(videoRefs.current).forEach(([idStr, video]) => {
       const id = Number(idStr);
       if (video) {
-        if (id === activeId) {
+        if (id === activeId && fullscreenVideoId === null) {
           video.play().catch(() => { });
         } else {
           video.pause();
@@ -145,7 +146,30 @@ const Hero = () => {
         }
       }
     });
-  }, [activeId, isMobile]);
+  }, [activeId, fullscreenVideoId, isMobile]);
+
+  // Keep all videos in sync with mute state for reliable mobile behavior
+  useEffect(() => {
+    Object.values(videoRefs.current).forEach((video) => {
+      if (video) video.muted = isMuted;
+    });
+    if (fullscreenVideoRef.current) {
+      fullscreenVideoRef.current.muted = isMuted;
+    }
+  }, [isMuted, fullscreenVideoId]);
+
+  // Pause all videos when tab/app is backgrounded
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        Object.values(videoRefs.current).forEach((video) => video?.pause());
+        fullscreenVideoRef.current?.pause();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
 
   // Lock body scroll during fullscreen
   useEffect(() => {
@@ -292,9 +316,12 @@ const Hero = () => {
                 src={fullscreenProject.videoUrl}
                 autoPlay
                 loop
+                muted={isMuted}
                 playsInline
                 className="w-full h-full object-cover"
-                ref={(el) => el && (el.volume = 1)}
+                ref={(el) => {
+                  fullscreenVideoRef.current = el;
+                }}
               />
 
               {/* Close button */}
@@ -418,21 +445,17 @@ const Hero = () => {
                     <video
                       ref={(el) => {
                         videoRefs.current[project.id] = el;
-                        if (el) {
-                          el.volume = isMuted ? 0 : 1;
-                          // Set initial time for thumbnail when metadata loads
-                          const handleLoadedMetadata = () => {
-                            if (el && project.id !== activeId) {
-                              el.currentTime = project.thumbnailTime;
-                            }
-                          };
-                          el.addEventListener('loadedmetadata', handleLoadedMetadata);
-                        }
                       }}
                       src={project.videoUrl}
                       preload="metadata"
                       loop
+                      muted={isMuted}
                       playsInline
+                      onLoadedMetadata={(e) => {
+                        if (project.id !== activeId) {
+                          e.currentTarget.currentTime = project.thumbnailTime;
+                        }
+                      }}
                       className="w-full h-full object-cover"
                     />
 
@@ -471,12 +494,7 @@ const Hero = () => {
                         className="absolute bottom-3 right-3 z-10 w-8 h-8 md:w-9 md:h-9 rounded-full bg-background/60 backdrop-blur-sm border border-border/30 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all duration-200"
                         onClick={(e) => {
                           e.stopPropagation();
-                          const newMutedState = !isMuted;
-                          setIsMuted(newMutedState);
-                          // Update all video volumes
-                          Object.values(videoRefs.current).forEach(video => {
-                            if (video) video.volume = newMutedState ? 0 : 1;
-                          });
+                          setIsMuted((prev) => !prev);
                         }}
                       >
                         {isMuted ? (

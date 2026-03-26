@@ -49,7 +49,12 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const apiBase = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "";
+      const configuredApiBase = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "";
+      const isLocalHost =
+        window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      const apiBase = !isLocalHost && /localhost|127\.0\.0\.1/.test(configuredApiBase)
+        ? ""
+        : configuredApiBase;
       const endpoint = apiBase ? `${apiBase}/api/contact` : "/api/contact";
 
       const response = await fetch(endpoint, {

@@ -15,6 +15,17 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          motion: ["framer-motion"],
+          router: ["react-router-dom"],
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

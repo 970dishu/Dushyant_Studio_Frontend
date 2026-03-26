@@ -9,7 +9,7 @@ const serviceOptions = [
   "Motion Design",
   "Film Editing",
   "Creative Direction",
-  "Storywriting",
+  "Short Form",
   "Other",
 ];
 

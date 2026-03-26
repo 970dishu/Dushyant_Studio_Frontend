@@ -24,7 +24,7 @@ Based on your project configuration, you need the following video files:
 1. `across-protocol-motion-design.mp4` - Across Protocol US project
 2. `agyaat-aadarsh-film-editing.mp4` - Agyaat Aadarsh project
 3. `vfx-ai-creative-direction.mp4` - VFX AI project
-4. `devlearn-storywriting.mp4` - Devlearn project
+4. `short-form-reels.mp4` - Short Form Reels project
 
 ## Video Optimization Tips
 

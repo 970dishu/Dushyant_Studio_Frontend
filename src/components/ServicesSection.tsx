@@ -1,117 +1,53 @@
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const services = [
   {
     number: "01",
     title: "Motion Design",
-    description: "Bringing static visuals to life through dynamic animations that captivate and engage audiences.",
-    details: [
-      "2D & 3D motion graphics",
-      "Logo animations",
-      "Explainer videos",
-      "Social media content",
-      "UI/UX micro-interactions",
-      "Kinetic typography",
-    ],
+    description:
+      "Bringing static visuals to life through dynamic animations that captivate and engage audiences.",
   },
   {
     number: "02",
     title: "Film Editing",
-    description: "Crafting compelling narratives through precise editing, pacing, and visual storytelling techniques.",
-    details: [
-      "Narrative film editing",
-      "Commercial editing",
-      "Documentary storytelling",
-      "Color grading",
-      "Sound design",
-      "Multi-camera editing",
-    ],
+    description:
+      "Crafting compelling narratives through precise editing, pacing, and visual storytelling techniques.",
   },
   {
     number: "03",
     title: "Video Editing",
-    description: "Transforming raw footage into polished, professional videos with seamless transitions and visual flow.",
-    details: [
-      "YouTube content editing",
-      "Short-form video editing",
-      "Interview editing",
-      "Promotional videos",
-      "Video color correction",
-      "Audio sync & mixing",
-    ],
+    description:
+      "Transforming raw footage into polished, professional videos with seamless transitions and visual flow.",
   },
   {
     number: "04",
-    title: "Storywriting",
-    description: "Developing compelling narratives that connect with audiences on an emotional level.",
-    details: [
-      "Script development",
-      "Storyboarding",
-      "Narrative structure",
-      "Brand storytelling",
-      "Character development",
-      "Concept writing",
-    ],
+    title: "Short Form",
+    description:
+      "Creating short-form content that hooks fast, tells a clear story, and drives engagement.",
   },
 ];
 
-const FloatingTag = ({
-  detail,
-  index
-}: {
-  detail: string;
-  index: number;
-}) => {
-  const tagRef = useRef<HTMLSpanElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: tagRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Each tag floats at different rates for organic feel
-  const floatOffset = (index % 3) - 1; // -1, 0, or 1
-  const yFull = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [15 + floatOffset * 5, 0, -15 - floatOffset * 5]
-  );
-  const rotateFull = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [floatOffset * 2, -floatOffset * 2]
-  );
-
-  // Disable parallax on mobile/reduced-motion for performance
-  const y = shouldReduceMotion ? 0 : yFull;
-  const rotate = shouldReduceMotion ? 0 : rotateFull;
-
-  return (
-    <motion.span
-      ref={tagRef}
-      style={{ y, rotate }}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-border/50 text-sm md:text-base text-foreground/80 hover:border-primary hover:text-primary transition-colors duration-300 inline-block"
-    >
-      {detail}
-    </motion.span>
-  );
+const serviceToProjectMap: Record<string, string> = {
+  "Motion Design": "motion-design-showcase",
+  "Film Editing": "film-editing-masterpiece",
+  "Video Editing": "creative-direction-vision",
+  "Short Form": "short-form-reels",
 };
 
 const ServiceCard = ({
   service,
   index,
   isActive,
-  onClick
+  onClick,
+  onViewProjectClick,
 }: {
-  service: typeof services[0];
+  service: (typeof services)[0];
   index: number;
   isActive: boolean;
   onClick: (index: number) => void;
+  onViewProjectClick: (serviceTitle: string) => void;
 }) => {
   return (
     <motion.div
@@ -123,7 +59,6 @@ const ServiceCard = ({
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
       <div className="py-4 md:py-8 px-4 md:px-8 flex items-center justify-between gap-4 md:gap-6">
-        {/* Left: Number + Title */}
         <div className="flex items-center gap-4 md:gap-10 flex-1 min-w-0">
           <span className="text-primary/40 font-heading text-base md:text-xl font-medium min-w-[2.5rem] md:min-w-[3.5rem] flex-shrink-0">
             {service.number}
@@ -137,12 +72,11 @@ const ServiceCard = ({
           </motion.h3>
         </div>
 
-        {/* Right: Arrow indicator */}
         <motion.div
           className="flex-shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full border border-border/50 flex items-center justify-center"
           animate={{
             backgroundColor: isActive ? "hsl(var(--primary))" : "transparent",
-            borderColor: isActive ? "hsl(var(--primary))" : "hsl(var(--border) / 0.5)"
+            borderColor: isActive ? "hsl(var(--primary))" : "hsl(var(--border) / 0.5)",
           }}
           transition={{ duration: 0.3 }}
         >
@@ -154,7 +88,9 @@ const ServiceCard = ({
             className="w-5 h-5 md:w-6 md:h-6"
             animate={{
               rotate: isActive ? 45 : 0,
-              stroke: isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))"
+              stroke: isActive
+                ? "hsl(var(--primary-foreground))"
+                : "hsl(var(--foreground))",
             }}
             transition={{ duration: 0.3 }}
           >
@@ -168,27 +104,58 @@ const ServiceCard = ({
         </motion.div>
       </div>
 
-      {/* Expanded Content */}
       <motion.div
         className="overflow-hidden"
         initial={{ height: 0, opacity: 0 }}
         animate={{
           height: isActive ? "auto" : 0,
-          opacity: isActive ? 1 : 0
+          opacity: isActive ? 1 : 0,
         }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >
         <div className="pb-4 md:pb-8 px-4 md:px-8 pl-[3.5rem] md:pl-[5.5rem] lg:pl-[6rem]">
-          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mb-4 md:mb-6">
-            {service.description}
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 14 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            className="rounded-xl border border-border/40 bg-secondary/20 p-4 md:p-5"
+          >
+            <p className="text-muted-foreground text-sm md:text-base max-w-2xl mb-4 leading-relaxed">
+              {service.description}
+            </p>
 
-          {/* Tags with parallax */}
-          <div className="flex flex-wrap gap-3">
-            {service.details.map((detail, i) => (
-              <FloatingTag key={i} detail={detail} index={i} />
-            ))}
-          </div>
+            <div className="flex justify-start">
+              <motion.button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onViewProjectClick(service.title);
+                }}
+                className="inline-flex items-center justify-center gap-2.5 px-4 md:px-6 py-2.5 md:py-3 rounded-lg border border-primary/50 bg-background/70 text-primary hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors duration-300 text-sm md:text-base font-medium"
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+              >
+                <span>View Project</span>
+                <motion.svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  animate={{ x: isActive ? [0, 3, 0] : 0 }}
+                  transition={{ duration: 1.2, repeat: isActive ? Infinity : 0, ease: "easeInOut" }}
+                >
+                  <path
+                    d="M5 12H19M19 12L12.5 5.5M19 12L12.5 18.5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </motion.svg>
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.div>
@@ -196,15 +163,22 @@ const ServiceCard = ({
 };
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  const handleViewProject = (serviceTitle: string) => {
+    const slug = serviceToProjectMap[serviceTitle];
+    if (!slug) return;
+    navigate(`/project/${slug}`);
+  };
 
   return (
     <section
@@ -212,14 +186,12 @@ const ServicesSection = () => {
       id="services"
       className="relative py-12 md:py-20 overflow-hidden"
     >
-      {/* Animated background gradient */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-background via-secondary/50 to-background pointer-events-none"
         style={{ y: backgroundY }}
       />
 
       <div className="container-wide relative z-10">
-        {/* Header */}
         <motion.div
           className="pt-2 md:pt-0 mb-6 ml-4 md:mb-12"
           initial={{ opacity: 0, y: 40 }}
@@ -241,7 +213,6 @@ const ServicesSection = () => {
           </h2>
         </motion.div>
 
-        {/* Services List */}
         <div className="border-t border-border/30">
           {services.map((service, index) => (
             <ServiceCard
@@ -250,6 +221,7 @@ const ServicesSection = () => {
               index={index}
               isActive={activeIndex === index}
               onClick={(i) => setActiveIndex(activeIndex === i ? null : i)}
+              onViewProjectClick={handleViewProject}
             />
           ))}
         </div>

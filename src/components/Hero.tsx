@@ -10,7 +10,7 @@ const videoProjects = [
     client: "Solana x Across",
     subtitle: "Solana Bridge",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/solana2.mp4",
+    videoUrl: "/videos/solana-across.mp4",
     thumbnailTime: 0.1
   },
   {
@@ -18,7 +18,7 @@ const videoProjects = [
     client: "RUN",
     subtitle: "SHOT ON IPHONE",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/run-shot-on-iphone.mp4",
+    videoUrl: "/videos/run-shot.mp4",
     thumbnailTime: 0.1
   },
   {
@@ -26,7 +26,7 @@ const videoProjects = [
     client: "Across Web3",
     subtitle: "DeFi Night",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/across-web3-defi-night.mp4",
+    videoUrl: "/videos/across-defi.mp4",
     thumbnailTime: 0.1
   },
   {
@@ -42,7 +42,7 @@ const videoProjects = [
     client: "Reliq",
     subtitle: "Launch Campaign",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/reliq-launch-campaign.mp4",
+    videoUrl: "/videos/reliq-launch.mp4",
     thumbnailTime: 7.0
   },
   {
@@ -50,7 +50,7 @@ const videoProjects = [
     client: "Devlearn",
     subtitle: "Community Pitch",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/devlearn-community-pitch.mp4",
+    videoUrl: "/videos/devlearn.mp4",
     thumbnailTime: 1.1
   },
   {
@@ -58,7 +58,7 @@ const videoProjects = [
     client: "Rangrezz-Alfaaz",
     subtitle: "Promotional Video",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/rangrezz-alfaaz-promotional.mp4",
+    videoUrl: "/videos/rangrezz-alfaaz.mp4",
     thumbnailTime: 1.1
   },
   {
@@ -66,7 +66,7 @@ const videoProjects = [
     client: "Across Web3",
     subtitle: "Infotainment",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/across-web3-infotainment.mp4",
+    videoUrl: "/videos/across-info.mp4",
     thumbnailTime: 0.1
   },
   {
@@ -90,7 +90,7 @@ const videoProjects = [
     client: "SaaS VFX AI",
     subtitle: "Explainer Video",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/saas-vfx-ai-explainer.mp4",
+    videoUrl: "/videos/vfx-ai-explainer.mp4",
     thumbnailTime: 0.1
   },
   {
@@ -98,7 +98,7 @@ const videoProjects = [
     client: "Thanks Giving",
     subtitle: "Welcoming Video",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/thanksgiving-welcoming.mp4",
+    videoUrl: "/videos/thanksgiving.mp4",
     thumbnailTime: 3.1
   },
   {
@@ -106,7 +106,15 @@ const videoProjects = [
     client: "Agyaat Khat",
     subtitle: "Short Series",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/agyaat-khat-short-series.mp4",
+    videoUrl: "/videos/agyaat-khat.mp4",
+    thumbnailTime: 0.1
+  },
+  {
+    id: 14,
+    client: "Aurat Jaat",
+    subtitle: "Short Series",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/aurat-jaat.mp4",
     thumbnailTime: 0.1
   },
 ];

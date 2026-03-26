@@ -10,6 +10,9 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const project = getProjectBySlug(slug || "");
   const otherProjects = getOtherProjects(slug || "");
+  const additionalVideos = [project?.secondaryVideo, ...(project?.extraVideos || [])].filter(Boolean) as string[];
+  const isShortFormReels = project?.slug === "short-form-reels";
+  const reelThumbnailTimes = project?.reelThumbnailTimes || [];
 
   if (!project) {
     return (
@@ -109,32 +112,73 @@ const ProjectDetail = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative aspect-video rounded-2xl overflow-hidden bg-secondary"
+            className="space-y-6"
           >
-            {project.heroVideo ? (
-              <video 
-                src={project.heroVideo} 
-                controls
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
+            {isShortFormReels && project.reelVideos && project.reelVideos.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-items-center">
+                {project.reelVideos.map((videoSrc, index) => (
+                  <div key={`${videoSrc}-${index}`} className="relative w-full max-w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-secondary">
+                    <video
+                      src={videoSrc}
+                      preload="metadata"
+                      controls
+                      loop
+                      muted
+                      playsInline
+                      onLoadedMetadata={(e) => {
+                        const thumbnailTime = reelThumbnailTimes[index];
+                        if (typeof thumbnailTime === "number" && thumbnailTime >= 0) {
+                          e.currentTarget.currentTime = thumbnailTime;
+                        }
+                      }}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
             ) : (
               <>
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-                {project.isVideo && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
-                      <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
-                    </div>
+                <div className="relative aspect-video rounded-2xl overflow-hidden bg-secondary">
+                  {project.heroVideo ? (
+                    <video 
+                      src={project.heroVideo} 
+                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <>
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                      {project.isVideo && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                            <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+
+                {additionalVideos.map((videoSrc, index) => (
+                  <div key={`${videoSrc}-${index}`} className="relative aspect-video rounded-2xl overflow-hidden bg-secondary">
+                    <video
+                      src={videoSrc}
+                      controls
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                )}
+                ))}
               </>
             )}
           </motion.div>

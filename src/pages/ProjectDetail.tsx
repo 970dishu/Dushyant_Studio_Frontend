@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Play } from "lucide-react";
@@ -13,6 +14,41 @@ const ProjectDetail = () => {
   const additionalVideos = [project?.secondaryVideo, ...(project?.extraVideos || [])].filter(Boolean) as string[];
   const isShortFormReels = project?.slug === "short-form-reels";
   const reelThumbnailTimes = project?.reelThumbnailTimes || [];
+
+  useEffect(() => {
+    if (!project) return;
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+
+    const creativeWorkSchema = {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.overview,
+      creator: {
+        "@type": "Person",
+        name: "Dushyant"
+      },
+      producer: {
+        "@type": "Organization",
+        name: project.client
+      },
+      dateCreated: String(project.year),
+      keywords: project.tools.join(", "),
+      tool: project.tools,
+      url: `${window.location.origin}/project/${project.slug}`
+    };
+
+    script.text = JSON.stringify(creativeWorkSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, [project]);
 
   if (!project) {
     return (

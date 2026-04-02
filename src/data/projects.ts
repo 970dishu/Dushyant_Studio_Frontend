@@ -27,6 +27,40 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "1",
+    slug: "film-editing-masterpiece",
+    category: "Film Editing",
+    title: "Agyaat Aadarsh",
+    shortDescription: "Story-first editing work with Agyaat Aadarsh, from viral reels to strong landscape videos.",
+    client: "Independent Filmmaker",
+    year: "2024",
+    role: "Lead Film Editor",
+    image: "/assets/agyaat-khat.jpg?w=800&h=600&fit=crop",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    heroVideo: "/videos/agyaat-khat.mp4",
+    // TODO: Add your second video file to public/videos/ folder and update the path
+    secondaryVideo: "/videos/aurat-jaat.mp4",
+    isVideo: true,
+    overview: "I work with Agyaat Aadarsh as an editor and director. We started with reels and later shifted to landscape storytelling, where our first big video, Agyaat Khat, reached a massive audience.",
+    problem: "At times, we had story blocks, creative disagreements, and location-level production challenges. The biggest task was to keep the story powerful while still making it watchable for social platforms.",
+    solution: "We handled each challenge with practical problem-solving on set and in edit sessions. Even when we disagreed, we sat down, aligned on story intent, and came back stronger with better cuts.",
+    results: [
+      "Agyaat Khat reached 16M views on Instagram.",
+      "Aurat Jaat also performed strongly and extended audience momentum.",
+      "Built a solid director-editor storytelling rhythm as a duo."
+    ],
+    challenges: [
+      "Managing creative conflicts without compromising story quality.",
+      "Balancing emotional storytelling with social media pacing.",
+      "Handling real-world production issues under tight timelines."
+    ],
+    tools: ["Premiere Pro", "After Effects", "Davinci Resolve"],
+    gallery: [
+      "/assets/group-photo.jpg?w=1200&h=800&fit=crop",
+      "/assets/selfie.jpg?w=1200&h=800&fit=crop"
+    ]
+  },
+  {
+    id: "2",
     slug: "motion-design-showcase",
     category: "Motion Design",
     title: "Across Protocol US",
@@ -60,40 +94,6 @@ export const projects: Project[] = [
     gallery: [
       "/assets/motion-design.jpg?w=1200&h=800&fit=crop",
       "/assets/hey-everyone.jpg?w=1200&h=800&fit=crop"
-    ]
-  },
-  {
-    id: "2",
-    slug: "film-editing-masterpiece",
-    category: "Film Editing",
-    title: "Agyaat Aadarsh",
-    shortDescription: "Story-first editing work with Agyaat Aadarsh, from viral reels to strong landscape videos.",
-    client: "Independent Filmmaker",
-    year: "2024",
-    role: "Lead Film Editor",
-    image: "/assets/agyaat-khat.jpg?w=800&h=600&fit=crop",
-    // TODO: Add your video file to public/videos/ folder and update the path
-    heroVideo: "/videos/agyaat-khat.mp4",
-    // TODO: Add your second video file to public/videos/ folder and update the path
-    secondaryVideo: "/videos/aurat-jaat.mp4",
-    isVideo: true,
-    overview: "I work with Agyaat Aadarsh as an editor and director. We started with reels and later shifted to landscape storytelling, where our first big video, Agyaat Khat, reached a massive audience.",
-    problem: "At times, we had story blocks, creative disagreements, and location-level production challenges. The biggest task was to keep the story powerful while still making it watchable for social platforms.",
-    solution: "We handled each challenge with practical problem-solving on set and in edit sessions. Even when we disagreed, we sat down, aligned on story intent, and came back stronger with better cuts.",
-    results: [
-      "Agyaat Khat reached 16M views on Instagram.",
-      "Aurat Jaat also performed strongly and extended audience momentum.",
-      "Built a solid director-editor storytelling rhythm as a duo."
-    ],
-    challenges: [
-      "Managing creative conflicts without compromising story quality.",
-      "Balancing emotional storytelling with social media pacing.",
-      "Handling real-world production issues under tight timelines."
-    ],
-    tools: ["Premiere Pro", "After Effects", "Davinci Resolve"],
-    gallery: [
-      "/assets/group-photo.jpg?w=1200&h=800&fit=crop",
-      "/assets/selfie.jpg?w=1200&h=800&fit=crop"
     ]
   },
   {

@@ -5,16 +5,8 @@ import MorphingText from "./MorphingText";
 import { Maximize2, X, Volume2, VolumeX } from "lucide-react";
 
 const videoProjects = [
-    {
-    id: 1,
-    client: "Solana x Across",
-    subtitle: "Solana Bridge",
-    // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/solana-across.mp4",
-    thumbnailTime: 0.1
-  },
   {
-    id: 2,
+    id: 1,
     client: "RUN",
     subtitle: "SHOT ON IPHONE",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -22,7 +14,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 3,
+    id: 2,
     client: "Across Web3",
     subtitle: "DeFi Night",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -30,28 +22,36 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 4,
-    client: "Finance",
-    subtitle: "Documentry",
-    // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/finance-documentary.mp4",
-    thumbnailTime: 0.1
-  },
-  {
-    id: 5,
-    client: "Reliq",
-    subtitle: "Launch Campaign",
-    // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/reliq-launch.mp4",
-    thumbnailTime: 7.0
-  },
-  {
-    id: 6,
+    id: 3,
     client: "Devlearn",
     subtitle: "Community Pitch",
     // TODO: Add your video file to public/videos/ folder and update the path
     videoUrl: "/videos/devlearn.mp4",
     thumbnailTime: 1.1
+  },
+  {
+    id: 4,
+    client: "Agyaat Khat Intro",
+    subtitle: "Animated Intro",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/agyaat-khat-intro.mp4",
+    thumbnailTime: 3.1
+  },
+  {
+    id: 5,
+    client: "Across Web3",
+    subtitle: "Infotainment",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/across-info.mp4",
+    thumbnailTime: 0.1
+  },
+  {
+    id: 6,
+    client: "Finance",
+    subtitle: "Documentry",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/finance-documentary.mp4",
+    thumbnailTime: 0.1
   },
   {
     id: 7,
@@ -63,22 +63,6 @@ const videoProjects = [
   },
   {
     id: 8,
-    client: "Across Web3",
-    subtitle: "Infotainment",
-    // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/across-info.mp4",
-    thumbnailTime: 0.1
-  },
-  {
-    id: 9,
-    client: "Agyaat Khat Intro",
-    subtitle: "Animated Intro",
-    // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/agyaat-khat-intro.mp4",
-    thumbnailTime: 3.1
-  },
-  {
-    id: 10,
     client: "SaaS VFX AI",
     subtitle: "Intro Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -86,7 +70,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 11,
+    id: 9,
     client: "SaaS VFX AI",
     subtitle: "Explainer Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -94,7 +78,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 12,
+    id: 10,
     client: "Thanks Giving",
     subtitle: "Welcoming Video",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -102,7 +86,7 @@ const videoProjects = [
     thumbnailTime: 3.1
   },
   {
-    id: 13,
+    id: 11,
     client: "Agyaat Khat",
     subtitle: "Short Series",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -110,7 +94,7 @@ const videoProjects = [
     thumbnailTime: 0.1
   },
   {
-    id: 14,
+    id: 12,
     client: "Aurat Jaat",
     subtitle: "Short Series",
     // TODO: Add your video file to public/videos/ folder and update the path

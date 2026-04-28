@@ -66,7 +66,7 @@ const videoProjects = [
     client: "SaaS VFX AI",
     subtitle: "Intro Video",
     // TODO: Add your video file to public/videos/ folder and update the path
-    videoUrl: "/videos/saas-vfx-ai-intro.mp4",
+    videoUrl: "/videos/vfx-ai-intro.mp4",
     thumbnailTime: 0.1
   },
   {

@@ -101,6 +101,38 @@ const videoProjects = [
     videoUrl: "/videos/aurat-jaat.mp4",
     thumbnailTime: 0.1
   },
+  {
+    id: 13,
+    client: "Reliq Launch",
+    subtitle: "Launch Video",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/reliq-launch.mp4",
+    thumbnailTime: 0.7
+  },
+  {
+    id: 14,
+    client: "Solana x Across",
+    subtitle: "Promo Video",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/solana-across.mp4",
+    thumbnailTime: 0.1
+  },
+  {
+    id: 15,
+    client: "Yaas Trial",
+    subtitle: "Trial Edit",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/yaas-trial.mp4",
+    thumbnailTime: 0.1
+  },
+  {
+    id: 16,
+    client: "Yaas Intro",
+    subtitle: "Intro Video",
+    // TODO: Add your video file to public/videos/ folder and update the path
+    videoUrl: "/videos/yaas-intro.mp4",
+    thumbnailTime: 7
+  },
 ];
 
 const Hero = () => {

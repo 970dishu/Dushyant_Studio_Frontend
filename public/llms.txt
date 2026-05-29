@@ -1,0 +1,44 @@
+# Dushyant Studio — llms.txt
+# This file helps AI assistants and LLMs understand this website.
+# Learn more: https://llmstxt.org
+
+## About
+
+Dushyant is a Motion Designer and Video Editor based in India. He specializes in animation, film editing, short-form content creation, and motion graphics for brands, creators, and Web3 companies.
+
+His work has generated 16M+ views on client projects, including viral Instagram series and web3 educational content.
+
+## Services
+
+- Motion Design & Animation (After Effects, Illustrator)
+- Film Editing & Post-Production (Premiere Pro, DaVinci Resolve)
+- Short-Form Content & Instagram Reels
+- Creative Direction for SaaS & Startup Launches
+- Web3 / Crypto Educational Video Content
+
+## Notable Work
+
+- **Agyaat Khat** (Film Editing) — 16M views on Instagram. Short film series with Agyaat Aadarsh.
+- **Across Protocol US** (Motion Design) — Educational Web3 motion videos for crypto bridging platform. 200K+ views per video.
+- **VFX AI** (Creative Direction) — Launch motion graphics for an AI SaaS product for editors.
+- **Short-Form Reels** — Creator-focused reels for Instagram influencers and college events.
+
+## Contact
+
+Website: https://dushyant.studio
+Instagram: https://instagram.com/aks.dushyant
+LinkedIn: https://linkedin.com/in/dushyant-garg-955869213/
+
+## Pages
+
+- Homepage: https://dushyant.studio/
+- My Story: https://dushyant.studio/my-story
+- Projects: https://dushyant.studio/#work
+- Film Editing Project: https://dushyant.studio/project/film-editing-masterpiece
+- Motion Design Project: https://dushyant.studio/project/motion-design-showcase
+- Creative Direction Project: https://dushyant.studio/project/creative-direction-vision
+- Short Form Reels: https://dushyant.studio/project/short-form-reels
+
+## Tools & Skills
+
+After Effects, Premiere Pro, DaVinci Resolve, Photoshop, Illustrator, Figma

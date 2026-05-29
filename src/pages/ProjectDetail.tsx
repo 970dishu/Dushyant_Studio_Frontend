@@ -18,6 +18,27 @@ const ProjectDetail = () => {
   useEffect(() => {
     if (!project) return;
 
+    const pageTitle = `${project.title} | Dushyant — ${project.category}`;
+    const pageDesc = `${project.shortDescription} — ${project.role} for ${project.client} (${project.year}). Tools: ${project.tools.join(", ")}.`;
+    const pageUrl = `https://dushyant.studio/project/${project.slug}`;
+
+    document.title = pageTitle;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const metaOgTitle = document.querySelector('meta[property="og:title"]');
+    const metaOgDesc = document.querySelector('meta[property="og:description"]');
+    const metaOgUrl = document.querySelector('meta[property="og:url"]');
+    const metaTwTitle = document.querySelector('meta[name="twitter:title"]');
+    const metaTwDesc = document.querySelector('meta[name="twitter:description"]');
+    const canonical = document.querySelector('link[rel="canonical"]');
+
+    if (metaDesc) metaDesc.setAttribute("content", pageDesc);
+    if (metaOgTitle) metaOgTitle.setAttribute("content", pageTitle);
+    if (metaOgDesc) metaOgDesc.setAttribute("content", pageDesc);
+    if (metaOgUrl) metaOgUrl.setAttribute("content", pageUrl);
+    if (metaTwTitle) metaTwTitle.setAttribute("content", pageTitle);
+    if (metaTwDesc) metaTwDesc.setAttribute("content", pageDesc);
+    if (canonical) canonical.setAttribute("href", pageUrl);
+
     const script = document.createElement("script");
     script.type = "application/ld+json";
 
@@ -28,7 +49,8 @@ const ProjectDetail = () => {
       description: project.overview,
       creator: {
         "@type": "Person",
-        name: "Dushyant"
+        name: "Dushyant",
+        url: "https://dushyant.studio"
       },
       producer: {
         "@type": "Organization",
@@ -36,14 +58,19 @@ const ProjectDetail = () => {
       },
       dateCreated: String(project.year),
       keywords: project.tools.join(", "),
-      tool: project.tools,
-      url: `${window.location.origin}/project/${project.slug}`
+      url: pageUrl
     };
 
     script.text = JSON.stringify(creativeWorkSchema);
     document.head.appendChild(script);
 
     return () => {
+      document.title = "Dushyant | Motion Designer & Video Editor Portfolio";
+      if (metaDesc) metaDesc.setAttribute("content", "Dushyant is a Motion Designer & Video Editor creating high-impact animations, film edits, and short-form content. 16M+ views. Explore portfolio & projects.");
+      if (metaOgTitle) metaOgTitle.setAttribute("content", "Dushyant | Motion Designer & Video Editor Portfolio");
+      if (metaOgUrl) metaOgUrl.setAttribute("content", "https://dushyant.studio");
+      if (metaTwTitle) metaTwTitle.setAttribute("content", "Dushyant | Motion Designer & Video Editor Portfolio");
+      if (canonical) canonical.setAttribute("href", "https://dushyant.studio");
       if (document.head.contains(script)) {
         document.head.removeChild(script);
       }

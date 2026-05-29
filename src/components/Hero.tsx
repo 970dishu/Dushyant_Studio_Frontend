@@ -159,12 +159,11 @@ const Hero = () => {
       const id = Number(idStr);
       if (video) {
         if (id === activeId && fullscreenVideoId === null) {
-          video.play().catch(() => { });
+          if (video.src) video.play().catch(() => { });
         } else {
           video.pause();
-          // Reset to thumbnail time instead of 0
           const project = videoProjects.find(p => p.id === id);
-          if (project) {
+          if (project && video.src) {
             video.currentTime = project.thumbnailTime;
           }
         }
@@ -436,6 +435,8 @@ const Hero = () => {
 
             {videoProjects.map((project, index) => {
               const isActive = activeId === project.id;
+              const activeIndex = videoProjects.findIndex(p => p.id === activeId);
+              const isNearActive = activeIndex === -1 ? index < 3 : Math.abs(index - activeIndex) <= 2;
               const t = cardTransforms[project.id];
               const rotateY = t?.rotateY ?? 0;
               const translateZ = t?.translateZ ?? 0;
@@ -470,8 +471,8 @@ const Hero = () => {
                       ref={(el) => {
                         videoRefs.current[project.id] = el;
                       }}
-                      src={project.videoUrl}
-                      preload="metadata"
+                      src={isNearActive ? project.videoUrl : undefined}
+                      preload={isActive ? "auto" : "metadata"}
                       loop
                       muted={isMuted}
                       playsInline

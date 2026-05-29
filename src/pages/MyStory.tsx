@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -262,6 +263,19 @@ const AchievementCard = ({ achievement, index }: { achievement: typeof achieveme
 };
 
 const MyStory = () => {
+  useEffect(() => {
+    document.title = "My Story | Dushyant — Motion Designer & Video Editor";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", "Learn about Dushyant's journey as a Motion Designer and Video Editor — from college reels to 16M-view films and Web3 motion graphics for US companies.");
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute("href", "https://dushyant.studio/my-story");
+    return () => {
+      document.title = "Dushyant | Motion Designer & Video Editor Portfolio";
+      if (metaDesc) metaDesc.setAttribute("content", "Dushyant is a Motion Designer & Video Editor creating high-impact animations, film edits, and short-form content. 16M+ views. Explore portfolio & projects.");
+      if (canonical) canonical.setAttribute("href", "https://dushyant.studio");
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />

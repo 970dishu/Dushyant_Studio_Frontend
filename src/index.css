@@ -212,6 +212,40 @@
   animation: marquee-reverse 25s linear infinite;
 }
 
+/* Hide default cursor on non-touch devices (custom cursor replaces it) */
+@media (hover: hover) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+/* Footer big marquee */
+@keyframes footer-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-footer-marquee {
+  animation: footer-marquee 18s linear infinite;
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--secondary)) 25%,
+    hsl(var(--muted)) 50%,
+    hsl(var(--secondary)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

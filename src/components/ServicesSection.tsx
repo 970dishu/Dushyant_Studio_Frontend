@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
+import SplitText from "./SplitText";
 
 const services = [
   {
@@ -208,9 +209,14 @@ const ServicesSection = () => {
           >
             What I Do
           </motion.p>
-          <h2 className="font-heading text-3xl md:text-5xl font-medium text-foreground leading-[1.1]">
-            What can I do for you<span className="text-primary">?</span>
-          </h2>
+          <SplitText
+            as="h2"
+            className="font-heading text-3xl md:text-5xl font-medium text-foreground leading-[1.1]"
+            delay={0.15}
+            stagger={0.07}
+          >
+            What can I do for you?
+          </SplitText>
         </motion.div>
 
         <div className="border-t border-border/30">

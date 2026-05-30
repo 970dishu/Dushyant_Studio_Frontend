@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 import Lenis from "lenis";
 
+// Shared ref so any component can stop/start Lenis
+export const activeLenisRef: { current: Lenis | null } = { current: null };
+
 export const useSmoothScroll = () => {
   const location = useLocation();
   const navigationType = useNavigationType();
@@ -14,6 +17,7 @@ export const useSmoothScroll = () => {
       touchMultiplier: 2,
     });
     lenisRef.current = lenis;
+    activeLenisRef.current = lenis;
 
     let rafId = 0;
 
@@ -28,6 +32,7 @@ export const useSmoothScroll = () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      activeLenisRef.current = null;
     };
   }, []);
 

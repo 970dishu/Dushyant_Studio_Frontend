@@ -5,7 +5,7 @@ import MorphingText from "./MorphingText";
 import { Maximize2, X, Volume2, VolumeX } from "lucide-react";
 
 const videoProjects = [
-  { id: 1,  client: "Taxes",             subtitle: "Assignment",        videoUrl: "/videos/taxes.mp4",               thumbnailTime: 49.1 },
+  { id: 1,  client: "Taxes",             subtitle: "Assignment",        videoUrl: "/videos/Taxes.mp4",               thumbnailTime: 49.1 },
   { id: 2,  client: "Across Web3",       subtitle: "DeFi Night",        videoUrl: "/videos/across-defi.mp4",         thumbnailTime: 0.1 },
   { id: 3,  client: "Devlearn",          subtitle: "Community Pitch",   videoUrl: "/videos/devlearn.mp4",            thumbnailTime: 1.1 },
   { id: 4,  client: "Agyaat Khat Intro", subtitle: "Animated Intro",    videoUrl: "/videos/agyaat-khat-intro.mp4",   thumbnailTime: 3.1 },

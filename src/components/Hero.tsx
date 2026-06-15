@@ -434,7 +434,6 @@ const Hero = () => {
                       : (isMobile ? "clamp(180px, 58vw, 340px)" : "clamp(250px, 35vw, 440px)"),
                     // Only width transitions via CSS; transform is written directly each frame (no lag)
                     transition: "width 0.55s cubic-bezier(0.25,1,0.5,1)",
-                    transformStyle: isMobile ? undefined : "preserve-3d",
                   }}
                   onClick={() => handleCardClick(project.id)}
                 >
@@ -496,6 +495,7 @@ const Hero = () => {
                         <motion.button
                           initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                           className="absolute top-3 right-3 z-10 w-8 h-8 md:w-9 md:h-9 rounded-full bg-background/60 backdrop-blur-sm border border-primary/30 flex items-center justify-center hover:bg-primary/20 hover:border-primary/60 transition-all duration-200"
+                          onPointerDown={(e) => e.stopPropagation()}
                           onClick={(e) => { e.stopPropagation(); setFullscreenVideoId(project.id); }}
                         >
                           <Maximize2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground/80" />
@@ -506,7 +506,14 @@ const Hero = () => {
                         <motion.button
                           initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                           className="absolute bottom-3 right-3 z-10 w-8 h-8 md:w-9 md:h-9 rounded-full bg-background/60 backdrop-blur-sm border border-primary/30 flex items-center justify-center hover:bg-primary/20 hover:border-primary/60 transition-all duration-200"
-                          onClick={(e) => { e.stopPropagation(); setIsMuted((p) => !p); }}
+                          onPointerDown={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const newMuted = !isMuted;
+                            setIsMuted(newMuted);
+                            Object.values(videoRefs.current).forEach((v) => { if (v) v.muted = newMuted; });
+                            if (fullscreenVideoRef.current) fullscreenVideoRef.current.muted = newMuted;
+                          }}
                         >
                           {isMuted
                             ? <VolumeX className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground/80" />

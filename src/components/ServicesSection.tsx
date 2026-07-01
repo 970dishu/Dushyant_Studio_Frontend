@@ -4,24 +4,25 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import SplitText from "./SplitText";
 
 const services = [
-  {
+    {
     number: "01",
+    title: "Film Editing",
+    description:
+      "Crafting compelling narratives through precise editing, pacing, and visual storytelling techniques.",
+  },
+    {
+    number: "02",
     title: "Motion Design",
     description:
       "Bringing static visuals to life through dynamic animations that captivate and engage audiences.",
   },
   {
-    number: "02",
-    title: "Film Editing",
-    description:
-      "Crafting compelling narratives through precise editing, pacing, and visual storytelling techniques.",
-  },
-  {
     number: "03",
-    title: "Video Editing",
+    title: "SaaS Editing",
     description:
-      "Transforming raw footage into polished, professional videos with seamless transitions and visual flow.",
+      "Creating engaging motion graphics for SaaS products that explain complex features in simple terms.",
   },
+
   {
     number: "04",
     title: "Short Form",
@@ -31,9 +32,9 @@ const services = [
 ];
 
 const serviceToProjectMap: Record<string, string> = {
-  "Motion Design": "motion-design-showcase",
   "Film Editing": "film-editing-masterpiece",
-  "Video Editing": "creative-direction-vision",
+  "Motion Design": "motion-design-showcase",
+  "SaaS Editing": "creative-motion-vision",
   "Short Form": "short-form-reels",
 };
 

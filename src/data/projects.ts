@@ -32,7 +32,7 @@ export const projects: Project[] = [
     title: "Agyaat Aadarsh",
     shortDescription: "Story-first editing work with Agyaat Aadarsh, from viral reels to strong landscape videos.",
     client: "Independent Filmmaker",
-    year: "2024",
+    year: "2025",
     role: "Lead Film Editor",
     image: "/assets/agyaat-khat.jpg?w=800&h=600&fit=crop",
     // TODO: Add your video file to public/videos/ folder and update the path
@@ -98,12 +98,12 @@ export const projects: Project[] = [
   },
   {
     id: "3",
-    slug: "creative-direction-vision",
-    category: "Video Editing",
+    slug: "creative-motion-vision",
+    category: "SaaS Editing",
     title: "VFX AI",
     shortDescription: "SaaS AI launch motion graphics made from scratch using Figma and After Effects.",
     client: "Tech Startup",
-    year: "2024",
+    year: "2025",
     role: "Creative Director",
     image: "/assets/vfx-ai.jpg?w=800&h=600&fit=crop",
     // TODO: Add your video file to public/videos/ folder and update the path

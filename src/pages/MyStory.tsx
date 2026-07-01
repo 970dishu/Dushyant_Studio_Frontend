@@ -29,21 +29,12 @@ const experiences = [
     role: "Motion Designer",
     company: "WEB3, Across Protocol US",
     location: "Remote",
-    period: "July 2025 - Present",
+    period: "July 2025 - June 2026",
     description: "Crafted dynamic videos and motion graphics for Across Protocol, enhancing brand communication and community engagement in the Web3 space on X.",
-    current: true,
-  },
-  {
-    id: 3,
-    role: "Media Head",
-    company: "Rangrezz, Chitkara University",
-    location: "Punjab",
-    period: "Oct 2025 - Dec 2025",
-    description: "Led the Media Team for Rangrezz, the college's largest national theatre fest, overseeing and creating promotional content that boosted reach and visibility Nationwide.",
     current: false,
   },
-  {
-    id: 4,
+    {
+    id: 3,
     role: "Marketing Specialist",
     company: "Devlearn Community",
     location: "Global",
@@ -51,6 +42,16 @@ const experiences = [
     description: "Actively contributed to community growth, technical initiatives, and learning-driven events while collaborating with WEB3 companies worldwide.",
     current: false,
   },
+  {
+    id: 4,
+    role: "Freelance",
+    company: "Self Employed",
+    location: "Punjab",
+    period: "Feb 2023 - Feb 2025",
+    description: "Worked on diverse projects including motion graphics, video editing, and content creation for various clients, honing skills in storytelling and visual communication.",
+    current: false,
+  },
+
 ];
 
 // Tech Stack Data

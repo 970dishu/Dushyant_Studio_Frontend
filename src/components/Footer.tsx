@@ -4,8 +4,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const socialLinks = [
-  { name: "Twitter / X", href: "https://x.com/Dushyant_Dishu" },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/dushyant-garg-955869213/" },
+  { name: "Twitter / X", href: "https://x.com/dushyant_com" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/dushyant-in/" },
   { name: "Instagram", href: "https://www.instagram.com/aks.dushyant/" },
   { name: "Behance", href: "https://www.behance.net/970dishu1" },
 ];

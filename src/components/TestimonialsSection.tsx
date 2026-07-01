@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import kanishkImg from "/assets/kanishk-khurana.png";
 import amanImg from "/assets/aman-verma.png";
@@ -36,9 +36,15 @@ const Counter = ({ end, suffix = "", duration = 2000 }: { end: number; suffix?: 
 
 const testimonials = [
   {
+    quote: "The creative direction and storytelling that Dushyant brought to our project transformed our campaign completely.",
+    name: "Agyaat Aadarsh",
+    role: "Content Creator",
+    avatar: agyaatImg,
+  },
+  {
     quote: "Dushyant's motion design elevated our brand to a whole new level. His attention to detail and creative vision is unmatched.",
     name: "Kanishk Khurana",
-    role: "DevRel Web3, Across Protocol",
+    role: "DevRel, Across Protocol",
     avatar: kanishkImg,
   },
   {
@@ -47,17 +53,11 @@ const testimonials = [
     role: "Marketing Lead",
     avatar: amanImg,
   },
-  {
-    quote: "The creative direction and storytelling Dushyant brought to our project transformed our campaign completely.",
-    name: "Agyaat Aadarsh",
-    role: "Content Creator",
-    avatar: agyaatImg,
-  },
 ];
 
 const stats = [
-  { value: 100, suffix: "%", label: "Client Satisfaction", description: "Every project delivered with excellence" },
-  { value: 50, suffix: "+", label: "Projects Delivered", description: "Across motion design, editing & direction" },
+  { value: 96, suffix: "%", label: "Client Satisfaction", description: "Every project delivered with excellence" },
+  { value: 32, suffix: "+", label: "Projects Delivered", description: "Across motion design, editing & direction" },
 ];
 
 const cardVariants = {
@@ -98,7 +98,14 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: typeof testimoni
       </span>
 
       <p className="text-foreground text-base md:text-lg mb-8 leading-relaxed flex-grow relative z-10">
-        "{testimonial.quote}"
+        "
+        {testimonial.quote.split("Dushyant").map((part, idx, arr) => (
+          <Fragment key={`${testimonial.name}-${idx}`}>
+            {part}
+            {idx < arr.length - 1 && <span className="text-primary">Dushyant</span>}
+          </Fragment>
+        ))}
+        "
       </p>
 
       <div className="flex items-center gap-4 mt-auto relative z-10">

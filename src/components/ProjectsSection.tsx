@@ -81,10 +81,15 @@ const ProjectCard = ({
         width: cardWidth,
         height: "72vh",
         borderRadius: 24,
-        rotateX: isCurrent ? rotateX : 0,
-        rotateY: isCurrent ? rotateY : 0,
-        transformPerspective: 1100,
-        transformStyle: "preserve-3d",
+        // Clipping (overflow-hidden + borderRadius) lives on this element only.
+        // No 3D transform here — combining overflow-hidden/border-radius with a
+        // rotateX/rotateY/perspective transform on the same element is what made
+        // the corners flash square mid-hover (a known compositor clipping bug).
+        // The mask forces the browser to composite this layer through its own
+        // rounded-corner mask instead of relying on overflow clipping alone,
+        // which is what keeps the clip solid once a descendant animates.
+        WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+        maskImage: "radial-gradient(white, black)",
         boxShadow: isCurrent
           ? hovered
             ? "0 40px 100px -20px rgba(0,0,0,0.75)"
@@ -101,117 +106,126 @@ const ProjectCard = ({
       onMouseLeave={onLeave}
       onClick={handleClick}
     >
-      {/* Image */}
-      <motion.img
-        src={project.image} alt={project.title}
-        className="absolute inset-0 w-full h-full object-cover"
-        animate={{
-          scale:  isCurrent && hovered ? 1.06 : 1,
-          filter: isCurrent && hovered ? "grayscale(0%)" : "grayscale(65%)",
+      {/* 3D tilt lives on this inner, unclipped layer — it visually stays inside
+          the rounded corners because the parent clips it, but doesn't share the
+          clipping element with the transform itself. No `transformStyle:
+          preserve-3d` here: it forces this layer into its own 3D rendering
+          context, which is what made the parent's overflow-hidden/border-radius
+          intermittently fail to clip it (square corners flashing on hover).
+          A single rotateX/rotateY + perspective doesn't need preserve-3d since
+          nothing inside needs to keep its own 3D position. */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          rotateX: isCurrent ? rotateX : 0,
+          rotateY: isCurrent ? rotateY : 0,
+          transformPerspective: 1100,
         }}
-        transition={{
-          scale:  { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-          filter: { duration: 0.5 },
-        }}
-      />
-
-      {/* Video preview (current card only) */}
-      {isCurrent && project.heroVideo && (
-        <motion.video
-          ref={videoRef}
-          src={hovered ? project.heroVideo : undefined}
-          muted loop playsInline preload="none"
-          onCanPlay={() => setVideoReady(true)}
+      >
+        {/* Image */}
+        <motion.img
+          src={project.image} alt={project.title}
           className="absolute inset-0 w-full h-full object-cover"
-          animate={{ opacity: hovered && videoReady ? 1 : 0 }}
-          transition={{ duration: 0.55 }}
-        />
-      )}
-
-      {/* Cursor glow */}
-      {isCurrent && (
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: glowBg }}
-          animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        />
-      )}
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-black/5" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/35 to-transparent" />
-
-      {/* Top bar */}
-      <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10">
-        <span
-          className="px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-[0.13em] backdrop-blur-md"
-          style={{
-            background: "hsl(var(--primary) / 0.15)",
-            color: "hsl(var(--primary))",
-            border: "1px solid hsl(var(--primary) / 0.4)",
+          animate={{
+            scale:  isCurrent && hovered ? 1.06 : 1,
+            filter: isCurrent && hovered ? "grayscale(0%)" : "grayscale(65%)",
           }}
-        >
-          {project.category}
-        </span>
-        {isCurrent && (
-          <motion.div
-            className="w-10 h-10 rounded-full flex items-center justify-center border backdrop-blur-md"
-            animate={{
-              backgroundColor: hovered ? "hsl(var(--primary))" : "rgba(255,255,255,0.08)",
-              borderColor:     hovered ? "hsl(var(--primary))" : "rgba(255,255,255,0.2)",
-              rotate: hovered ? 45 : 0,
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <ArrowUpRight className="w-4 h-4 text-white" />
-          </motion.div>
+          transition={{
+            scale:  { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+            filter: { duration: 0.5 },
+          }}
+        />
+
+        {/* Video preview (current card only) */}
+        {isCurrent && project.heroVideo && (
+          <motion.video
+            ref={videoRef}
+            src={hovered ? project.heroVideo : undefined}
+            muted loop playsInline preload="none"
+            onCanPlay={() => setVideoReady(true)}
+            className="absolute inset-0 w-full h-full object-cover"
+            animate={{ opacity: hovered && videoReady ? 1 : 0 }}
+            transition={{ duration: 0.55 }}
+          />
         )}
-      </div>
 
-      {/* Bottom content */}
-      <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-7 md:pb-10 z-10">
-        <div
-          aria-hidden
-          className="absolute bottom-2 right-5 font-heading font-black select-none pointer-events-none leading-none"
-          style={{ fontSize: "clamp(6rem, 12vw, 16rem)", color: "rgba(255,255,255,0.04)" }}
-        >
-          {String(index + 1).padStart(2, "0")}
-        </div>
+        {/* Cursor glow */}
+       
 
-        <motion.h3
-          className="font-heading font-bold text-white leading-none mb-3"
-          style={{ fontSize: "clamp(1.8rem, 3.5vw, 4.5rem)" }}
-          animate={{ y: isCurrent && hovered ? -4 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {project.title}
-        </motion.h3>
+      
 
-        {isCurrent && (
-          <>
-            <motion.p
-              className="text-white/55 text-sm md:text-base mb-5 max-w-xl leading-relaxed"
-              animate={{ opacity: hovered ? 0.85 : 0.55 }}
+        {/* Top bar */}
+        <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-10">
+          <span
+            className="px-3 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-[0.13em] backdrop-blur-md"
+            style={{
+              background: "hsl(var(--primary) / 0.15)",
+              color: "hsl(var(--primary))",
+              border: "1px solid hsl(var(--primary) / 0.4)",
+            }}
+          >
+            {project.category}
+          </span>
+          {isCurrent && (
+            <motion.div
+              className="w-10 h-10 rounded-full flex items-center justify-center border backdrop-blur-md"
+              animate={{
+                backgroundColor: hovered ? "hsl(var(--primary))" : "rgba(255,255,255,0.08)",
+                borderColor:     hovered ? "hsl(var(--primary))" : "rgba(255,255,255,0.2)",
+                rotate: hovered ? 45 : 0,
+              }}
               transition={{ duration: 0.3 }}
             >
-              {project.shortDescription}
-            </motion.p>
+              <ArrowUpRight className="w-4 h-4 text-white" />
+            </motion.div>
+          )}
+        </div>
 
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs md:text-sm">
-              {[
-                { label: "Client", value: project.client },
-                { label: "Year",   value: project.year   },
-                { label: "Role",   value: project.role   },
-              ].map(({ label, value }) => (
-                <div key={label} className="flex items-center gap-1.5">
-                  <span className="text-white/35">{label}</span>
-                  <span className="text-white/80 font-medium">{value}</span>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+        {/* Bottom content */}
+        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-7 md:pb-10 z-10">
+          <div
+            aria-hidden
+            className="absolute bottom-2 right-5 font-heading font-black select-none pointer-events-none leading-none"
+            style={{ fontSize: "clamp(6rem, 12vw, 16rem)", color: "rgba(255,255,255,0.04)" }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </div>
+
+          <motion.h3
+            className="font-heading font-bold text-white leading-none mb-3"
+            style={{ fontSize: "clamp(1.8rem, 3.5vw, 4.5rem)" }}
+            animate={{ y: isCurrent && hovered ? -4 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {project.title}
+          </motion.h3>
+
+          {isCurrent && (
+            <>
+              <motion.p
+                className="text-white/55 text-sm md:text-base mb-5 max-w-xl leading-relaxed"
+                animate={{ opacity: hovered ? 0.85 : 0.55 }}
+                transition={{ duration: 0.3 }}
+              >
+                {project.shortDescription}
+              </motion.p>
+
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs md:text-sm">
+                {[
+                  { label: "Client", value: project.client },
+                  { label: "Year",   value: project.year   },
+                  { label: "Role",   value: project.role   },
+                ].map(({ label, value }) => (
+                  <div key={label} className="flex items-center gap-1.5">
+                    <span className="text-white/35">{label}</span>
+                    <span className="text-white/80 font-medium">{value}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -301,8 +315,61 @@ const ProjectsSection = () => {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const prev = () => { if (current > 0) setCurrent((c) => c - 1); };
-  const next = () => { if (current < N - 1) setCurrent((c) => c + 1); };
+  // Debounce navigation: the track uses a spring transition (~0.5s), so firing
+  // another step mid-flight (rapid clicks or a single trackpad swipe emitting
+  // many wheel events) made the carousel feel like it "skipped" or ignored input.
+  const navLock = useRef(false);
+  const lockNav = () => {
+    navLock.current = true;
+    setTimeout(() => { navLock.current = false; }, 550);
+  };
+
+  const goTo = useCallback((index: number) => {
+    if (navLock.current) return;
+    setCurrent((c) => {
+      const clamped = Math.max(0, Math.min(N - 1, index));
+      if (clamped === c) return c;
+      lockNav();
+      return clamped;
+    });
+  }, []);
+
+  // Loops instead of dead-ending at the first/last project — with a hard stop,
+  // Prev sits disabled on project 1 (and Next on the last project), which reads
+  // as a broken button rather than "you're at the edge".
+  const prev = useCallback(() => {
+    if (navLock.current) return;
+    setCurrent((c) => {
+      lockNav();
+      return (c - 1 + N) % N;
+    });
+  }, []);
+
+  const next = useCallback(() => {
+    if (navLock.current) return;
+    setCurrent((c) => {
+      lockNav();
+      return (c + 1) % N;
+    });
+  }, []);
+
+  // Trackpad / mouse-wheel navigation: a horizontal swipe (deltaX) steps the
+  // carousel; vertical scrolling is left untouched so the page keeps scrolling
+  // normally. Needs a native (non-passive) listener — React's synthetic onWheel
+  // is passive by default, so preventDefault() there is silently ignored.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || isMobile) return;
+    const onWheel = (e: WheelEvent) => {
+      const absX = Math.abs(e.deltaX);
+      const absY = Math.abs(e.deltaY);
+      if (absX < 12 || absX <= absY) return;
+      e.preventDefault();
+      if (e.deltaX > 0) next(); else prev();
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [isMobile, next, prev]);
 
   return (
     <section id="work" className="relative bg-background section-padding">
@@ -351,16 +418,14 @@ const ProjectsSection = () => {
 
               <button
                 onClick={prev}
-                disabled={current === 0}
-                className="w-12 h-12 rounded-full border border-border/40 flex items-center justify-center text-foreground/60 hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
+                className="w-12 h-12 rounded-full border border-border/40 flex items-center justify-center text-foreground/60 hover:text-primary hover:border-primary hover:bg-primary/10 transition-all duration-300"
                 aria-label="Previous project"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={next}
-                disabled={current === N - 1}
-                className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:bg-primary/90 transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed"
+                className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:bg-primary/90 transition-all duration-300"
                 aria-label="Next project"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -387,7 +452,7 @@ const ProjectsSection = () => {
                     index={index}
                     isCurrent={index === current}
                     cardWidth={cardW}
-                    onCardClick={() => setCurrent(index)}
+                    onCardClick={() => goTo(index)}
                   />
                 ))}
               </motion.div>
@@ -398,7 +463,7 @@ const ProjectsSection = () => {
               {projects.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setCurrent(i)}
+                  onClick={() => goTo(i)}
                   aria-label={`Go to project ${i + 1}`}
                 >
                   <motion.div

@@ -66,15 +66,19 @@ const TasteCard = ({
   subtitle,
   image,
   link,
+  aspectRatio,
 }: {
   title: string;
   subtitle?: string;
   image?: string;
   link?: string;
+  aspectRatio?: "2/3" | "4/3";
 }) => {
+  const aspectClass = aspectRatio === "4/3" ? "aspect-[4/3]" : "aspect-[2/3]";
+
   const content = (
     <div className="group flex-shrink-0 w-48 md:w-56">
-      <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-secondary border border-border/30 mb-2">
+      <div className={`relative ${aspectClass} rounded-xl overflow-hidden bg-secondary border border-border/30 mb-2`}>
         {image ? (
           <img
             src={image}
@@ -108,9 +112,11 @@ const TasteCard = ({
 
 const TasteMarqueeRow = ({
   items,
+  aspectRatio,
   reverse = false,
 }: {
   items: (typeof tasteCategories)[number]["items"];
+  aspectRatio: TasteCategory["aspectRatio"];
   reverse?: boolean;
 }) => {
   const doubled = [...items, ...items];
@@ -125,7 +131,7 @@ const TasteMarqueeRow = ({
         } hover:[animation-play-state:paused]`}
       >
         {doubled.map((item, i) => (
-          <TasteCard key={`${item.title}-${i}`} {...item} />
+          <TasteCard key={`${item.title}-${i}`} aspectRatio={aspectRatio} {...item} />
         ))}
       </div>
     </div>
@@ -181,7 +187,11 @@ const TasteAndHobbiesSection = () => {
                     {category.name}
                   </span>
                 </div>
-                <TasteMarqueeRow items={category.items} reverse={index % 2 === 1} />
+                <TasteMarqueeRow
+                  items={category.items}
+                  aspectRatio={category.aspectRatio}
+                  reverse={index % 2 === 1}
+                />
               </div>
             ))}
           </div>

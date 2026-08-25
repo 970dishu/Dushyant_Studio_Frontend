@@ -17,7 +17,7 @@ import {
 const experiences = [
   {
     id: 1,
-    role: "Freelance Editor",
+    role: "Creative Director & Editor",
     company: "Agyaatfilms",
     location: "Chandigarh",
     period: "Feb 2025 - Present",
